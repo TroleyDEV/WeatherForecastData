@@ -13,12 +13,7 @@ option = st.selectbox(label="Select data to view", options=("Temperature", "Sky"
 
 st.subheader(f"{option} for the next {days} days in {place}")
 
-if option == "Temperature":
-    option = "main"
-elif option == "Sky":
-    option = "weather"
-
 data, date = get_data(place, days, option)
 
-figure = px.line(x=date, y=data, labels={"x": "Date", "y": "Temperatures (C)"})
+figure = px.line(x=date, y=data)
 st.plotly_chart(figure)

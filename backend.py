@@ -14,7 +14,7 @@ def get_data(place, forecast_days, kind):
     response = response[:forecast_days]
 
     if kind == "Temperature":
-        data = [item["main"]["temp"] for item in response]
+        data = [item["main"]["temp"] / 10 for item in response]
     if kind == "Sky":
         data = [item["weather"][0]["main"] for item in response]
 
