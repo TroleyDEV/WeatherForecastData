@@ -15,5 +15,9 @@ st.subheader(f"{option} for the next {days} days in {place}")
 
 data, date = get_data(place, days, option)
 
-figure = px.line(x=date, y=data)
-st.plotly_chart(figure)
+if option == "Temperature":
+    # Create temperature plot
+    figure = px.line(x=date, y=data)
+    st.plotly_chart(figure)
+
+
