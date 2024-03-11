@@ -1,5 +1,6 @@
-import streamlit as st
 import plotly.express as px
+import streamlit as st
+
 from backend import get_data
 
 # UI
@@ -13,11 +14,17 @@ option = st.selectbox(label="Select data to view", options=("Temperature", "Sky"
 
 st.subheader(f"{option} for the next {days} days in {place}")
 
-data, date = get_data(place, days, option)
+if place:
+    data, date = get_data(place, days, option)
 
-if option == "Temperature":
-    # Create temperature plot
-    figure = px.line(x=date, y=data)
-    st.plotly_chart(figure)
+    if option == "Temperature":
+        # Create temperature plot
+        figure = px.line(x=date, y=data)
+        st.plotly_chart(figure)
 
-
+    if option == "Sky":
+        # Create sky image
+        images = {"Clear": "images/clear.png", "Clouds": "images/cloud.png", "Rain": "images/rain.png",
+                  "Snow": "images/snow.png"}
+        image_paths = [images[condition] for condition in data]
+        st.image(image_paths, width=130, caption=date)
